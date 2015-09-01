@@ -1,0 +1,22 @@
+# IntelliJ IDEA
+# -------------
+.idea/
+out/
+*.iml
+*.ipr
+
+# Maven
+# -----
+target/
+pom.xml.bak
+pom.xml.versionsBackup
+
+# JRebel
+# ------
+rebel.xml
+
+# Other
+# -----
+*.eml
+*.DS_Store
+*.orig

@@ -11,13 +11,24 @@
     <artifactId>examples</artifactId>
 
     <dependencies>
+        <!-- Reference test classes packaged in test-jar from sibling project. -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commonTestUtils</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

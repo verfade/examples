@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>commonTestUtils</module>
         <module>examples</module>
     </modules>
 
@@ -80,6 +81,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
                 <plugin>
                     <groupId>com.github.ekryd.sortpom</groupId>
                     <artifactId>sortpom-maven-plugin</artifactId>

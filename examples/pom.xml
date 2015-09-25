@@ -31,4 +31,16 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>doNotRunSlowTests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <surefire.excludedGroups.junitCategories>be.kifaru.examples.SlowTestsCategory</surefire.excludedGroups.junitCategories>
+            </properties>
+        </profile>
+    </profiles>
 </project>

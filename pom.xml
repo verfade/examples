@@ -15,6 +15,8 @@
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <!-- sensible default -->
+        <my.build.directory>target</my.build.directory>
         <powermock.version>1.6.2</powermock.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- There are no excluded groups (JUnit categories) by default. -->
@@ -81,6 +83,7 @@
     </dependencyManagement>
 
     <build>
+        <directory>${my.build.directory}</directory>
         <pluginManagement>
             <plugins>
                 <plugin>

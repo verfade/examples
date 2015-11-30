@@ -36,22 +36,28 @@ public class BirdsEnumTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void fromStringNotNull_blankArguments_shouldThrowIllegalArgumentException() {
+    public void fromStringNotNull_blankArgument_shouldThrowIllegalArgumentException() {
         fromStringNotNull(BLANK_STRING);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void fromStringNotNull_emptyArguments_shouldThrowIllegalArgumentException() {
+    public void fromStringNotNull_emptyArgument_shouldThrowIllegalArgumentException() {
         fromStringNotNull(EMPTY_STRING);
     }
 
+    @Test
+    public void fromStringNotNull_knownArgument_shouldReturnValidEnum() {
+        assertThat(fromString("rooster"), is(ROOSTER));
+        assertThat(fromString("Gallus gallus"), is(ROOSTER));
+    }
+
     @Test(expected = IllegalArgumentException.class)
-    public void fromStringNotNull_nullArguments_shouldThrowIllegalArgumentException() {
+    public void fromStringNotNull_nullArgument_shouldThrowIllegalArgumentException() {
         fromStringNotNull(NULL_STRING);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void fromStringNotNull_unknownArguments_shouldThrowIllegalArgumentException() {
+    public void fromStringNotNull_unknownArgument_shouldThrowIllegalArgumentException() {
         fromStringNotNull("dummy data");
     }
 
@@ -63,6 +69,12 @@ public class BirdsEnumTest {
     @Test
     public void fromString_emptyArgument_shouldReturnNull() {
         assertThat(fromString(EMPTY_STRING), is(nullValue()));
+    }
+
+    @Test
+    public void fromString_knownArgument_shouldReturnValidEnum() {
+        assertThat(fromString("rooster"), is(ROOSTER));
+        assertThat(fromString("Gallus gallus"), is(ROOSTER));
     }
 
     @Test

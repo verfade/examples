@@ -41,14 +41,16 @@ public enum BirdsEnum {
 
             if (null != sanityCheck) {
                 String errorMessage = "BirdsEnum common name [%s] from enum [%s] already exists for enum [%s]";
-                throw new AssertionError(String.format(errorMessage, enumValue.commonName, enumValue, sanityCheck));
+                throw new AssertionError(
+                        String.format(errorMessage, enumValue.commonName, enumValue.name(), sanityCheck.name()));
             }
 
             sanityCheck = mappings.put(enumValue.species, enumValue);
 
             if (null != sanityCheck) {
                 String errorMessage = "BirdsEnum species [%s] from enum [%s] already exists for enum [%s]";
-                throw new AssertionError(String.format(errorMessage, enumValue.species, enumValue, sanityCheck));
+                throw new AssertionError(
+                        String.format(errorMessage, enumValue.species, enumValue.name(), sanityCheck.name()));
             }
         }
 

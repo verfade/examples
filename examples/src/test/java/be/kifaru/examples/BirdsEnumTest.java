@@ -47,8 +47,8 @@ public class BirdsEnumTest {
 
     @Test
     public void fromStringNotNull_knownArgument_shouldReturnValidEnum() {
-        assertThat(fromString("rooster"), is(ROOSTER));
-        assertThat(fromString("Gallus gallus"), is(ROOSTER));
+        assertThat(fromStringNotNull("rooster"), is(ROOSTER));
+        assertThat(fromStringNotNull("Gallus gallus"), is(ROOSTER));
     }
 
     @Test(expected = IllegalArgumentException.class)

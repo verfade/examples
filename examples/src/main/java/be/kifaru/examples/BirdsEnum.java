@@ -34,9 +34,10 @@ public enum BirdsEnum {
     private static final Map<String, BirdsEnum> MAPPINGS;
 
     static {
-        Map<String, BirdsEnum> mappings = new HashMap<>();
+        BirdsEnum[] enumValues = BirdsEnum.values();
+        Map<String, BirdsEnum> mappings = new HashMap<>(enumValues.length, 1);
 
-        for (BirdsEnum enumValue : BirdsEnum.values()) {
+        for (BirdsEnum enumValue : enumValues) {
             BirdsEnum sanityCheck = mappings.put(enumValue.commonName, enumValue);
 
             if (null != sanityCheck) {

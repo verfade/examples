@@ -3,6 +3,7 @@ package be.kifaru.examples;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author Devid Verfaillie
@@ -32,6 +33,11 @@ public enum BirdsEnum {
      * Contains the common name and species (Strings) to Enum mappings.
      */
     private static final Map<String, BirdsEnum> MAPPINGS;
+
+    private static final Random RANDOM = new Random();
+
+    // Enum.values() returns a new array on each invocation, so cache it when it is used often (e.g. #getRandomEnum)
+    private static final BirdsEnum[] ENUM_VALUES = values();
 
     static {
         BirdsEnum[] enumValues = BirdsEnum.values();
@@ -69,6 +75,10 @@ public enum BirdsEnum {
         }
 
         throw new IllegalArgumentException(String.format("Unknown search string [%s]", key));
+    }
+
+    public static BirdsEnum randomValue() {
+        return ENUM_VALUES[RANDOM.nextInt(ENUM_VALUES.length)];
     }
 
     private final String commonName;

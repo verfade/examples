@@ -7,6 +7,7 @@ import static be.kifaru.examples.BirdsEnum.COMMON_KESTREL;
 import static be.kifaru.examples.BirdsEnum.ROOSTER;
 import static be.kifaru.examples.BirdsEnum.fromString;
 import static be.kifaru.examples.BirdsEnum.fromStringNotNull;
+import static be.kifaru.examples.BirdsEnum.randomValue;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -100,7 +101,7 @@ public class BirdsEnumTest {
     @Test
     public void toString_shouldContainEnumName() {
         // regenerating #toString() might leave off the enum name
-        assertThat(COMMON_KESTREL.toString(), containsString(COMMON_KESTREL.name()));
-        assertThat(ROOSTER.toString(), containsString(ROOSTER.name()));
+        BirdsEnum randomBird = randomValue();
+        assertThat(randomBird.toString(), containsString(randomBird.name()));
     }
 }

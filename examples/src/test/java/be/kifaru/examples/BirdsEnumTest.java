@@ -96,4 +96,11 @@ public class BirdsEnumTest {
 //        assertThat(BirdsEnum.WHITE_THROATED_DIPPER.getCommonName(), is("white-throated dipper"));
 //        assertThat(BirdsEnum.WHITE_THROATED_DIPPER.getSpecies(), is("Cinclus cinclus"));
     }
+
+    @Test
+    public void toString_shouldContainEnumName() {
+        // regenerating #toString() might leave off the enum name
+        assertThat(COMMON_KESTREL.toString(), containsString(COMMON_KESTREL.name()));
+        assertThat(ROOSTER.toString(), containsString(ROOSTER.name()));
+    }
 }

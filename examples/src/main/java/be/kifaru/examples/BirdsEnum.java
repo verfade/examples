@@ -36,11 +36,12 @@ public enum BirdsEnum {
 
     private static final Random RANDOM = new Random();
 
-    // Enum.values() returns a new array on each invocation, so cache it when it is used often (e.g. #getRandomEnum)
+    // Enum.values() returns a new array on each invocation, so cache it when it is used often (e.g. #randomValue)
     private static final BirdsEnum[] ENUM_VALUES = values();
 
     static {
-        BirdsEnum[] enumValues = BirdsEnum.values();
+        // we could use the constant "ENUM_VALUES" here if it exists for another method (e.g. #randomValue)
+        BirdsEnum[] enumValues = values();
         Map<String, BirdsEnum> mappings = new HashMap<>(enumValues.length, 1);
 
         for (BirdsEnum enumValue : enumValues) {

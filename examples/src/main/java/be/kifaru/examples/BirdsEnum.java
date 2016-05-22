@@ -91,6 +91,14 @@ public enum BirdsEnum {
         this.species = species;
     }
 
+    public String getCommonName() {
+        return commonName;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
     /**
      * See Effective Java 2nd Edition, item 10 (Always override toString).
      */
@@ -105,13 +113,5 @@ public enum BirdsEnum {
                 ", commonName='" + commonName + '\'' +
                 ", species='" + species + '\'' +
                 '}';
-    }
-
-    public String getCommonName() {
-        return commonName;
-    }
-
-    public String getSpecies() {
-        return species;
     }
 }

@@ -1,8 +1,6 @@
 package be.kifaru.examples;
 
-import java.lang.reflect.Field;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Devid Verfaillie
@@ -40,17 +38,8 @@ public class RandomString {
 //        System.out.println("PRINTABLE_ASCII_CHARS = [" + PRINTABLE_ASCII_CHARS + "]");
 //    }
 
-    private static final Random RANDOM = new Random();
-
-    private static AtomicLong findSeedInRandomClass() {
-        try {
-            Field seedField = RANDOM.getClass().getDeclaredField("seed");
-            seedField.setAccessible(true);
-            return (AtomicLong) seedField.get(RANDOM);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new IllegalStateException("Could not get 'seed' field from Random.class", e);
-        }
-    }
+    // @VisibleForTesting
+    static final Random RANDOM = new Random();
 
     public static String generateRandomString(int requestedLength) {
         return generateRandomString(ALPHA_NUMERIC_MIXED_CASE_CHARS, requestedLength);
@@ -68,25 +57,5 @@ public class RandomString {
         }
 
         return new String(result);
-    }
-
-    /**
-     * Gets the seed used by the PRNG. Useful to rerun a (failed) test with the same random values.
-     * <p>
-     * Note that the seed changes after every Random#next(int) method call so you must call this method up front (e.g.
-     * in the @{@link org.junit.Before} method).
-     */
-    // @VisibleForTesting
-    static long getRandomSeed() {
-        AtomicLong seedValue = findSeedInRandomClass();
-        long scrambledSeed = seedValue.get();
-        // there is no need to unscramble as we will set it the same way as we got it (via reflection)
-        return scrambledSeed;
-    }
-
-    // @VisibleForTesting
-    static void setRandomSeed(long scrambledSeed) {
-        AtomicLong seedValue = findSeedInRandomClass();
-        seedValue.set(scrambledSeed);
     }
 }

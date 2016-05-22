@@ -1,5 +1,9 @@
 package be.kifaru.examples;
 
+import java.lang.reflect.Field;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
@@ -8,9 +12,8 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
+import static be.kifaru.examples.RandomString.RANDOM;
 import static be.kifaru.examples.RandomString.generateRandomString;
-import static be.kifaru.examples.RandomString.getRandomSeed;
-import static be.kifaru.examples.RandomString.setRandomSeed;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assume.*;
@@ -24,13 +27,41 @@ import static org.junit.Assume.*;
 @RunWith(Theories.class)
 public class RandomStringTest {
 
+    private static AtomicLong findSeedInRandomClass(Random randomInstance) {
+        try {
+            Field seedField = randomInstance.getClass().getDeclaredField("seed");
+            seedField.setAccessible(true);
+            return (AtomicLong) seedField.get(randomInstance);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new IllegalStateException("Could not get 'seed' field from Random.class", e);
+        }
+    }
+
+    /**
+     * Gets the seed used by the PRNG. Useful to rerun a (failed) test with the same random values.
+     * <p>
+     * Note that the seed changes after every Random#next(int) method call so you must call this method up front (e.g.
+     * in the @{@link org.junit.Before} method).
+     */
+    private static long getRandomSeed(Random randomInstance) {
+        AtomicLong seedValue = findSeedInRandomClass(randomInstance);
+        long scrambledSeed = seedValue.get();
+        // there is no need to unscramble as we will set it the same way as we got it (via reflection)
+        return scrambledSeed;
+    }
+
+    private static void setRandomSeed(Random randomInstance, long scrambledSeed) {
+        AtomicLong seedValue = findSeedInRandomClass(randomInstance);
+        seedValue.set(scrambledSeed);
+    }
+
     private long randomSeed;
 
     @Before
     public void before() throws Exception {
         // set the random seed to rerun a (failed) test with the same random values
 //        setRandomSeed(60862971477113L);
-        randomSeed = getRandomSeed();
+        randomSeed = getRandomSeed(RANDOM);
     }
 
 //    @Test(expected = OutOfMemoryError.class)
@@ -83,7 +114,7 @@ public class RandomStringTest {
         String randomStringBeforeSetRandomSeed_1 = generateRandomString(length);
         String randomStringBeforeSetRandomSeed_2 = generateRandomString(length);
 
-        setRandomSeed(randomSeed);
+        setRandomSeed(RANDOM, randomSeed);
 
         String randomStringAfterSetRandomSeed_1 = generateRandomString(length);
         String randomStringAfterSetRandomSeed_2 = generateRandomString(length);

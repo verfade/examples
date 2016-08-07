@@ -1,7 +1,9 @@
 package be.kifaru.examples;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 
 import static be.kifaru.examples.BirdsEnum.COMMON_KESTREL;
 import static be.kifaru.examples.BirdsEnum.ROOSTER;
@@ -35,6 +37,9 @@ public class BirdsEnumTest {
 
         // uncomment COMMON_KESTREL_COPY in the enum to test this case
     }
+
+    @Rule
+    public ErrorCollector errorCollector = new ErrorCollector();
 
     @Test(expected = IllegalArgumentException.class)
     public void fromStringNotNull_blankArgument_shouldThrowIllegalArgumentException() {
@@ -78,6 +83,19 @@ public class BirdsEnumTest {
         assertThat(fromString("Gallus gallus"), is(ROOSTER));
     }
 
+    /**
+     * This test is the same as the one above but uses an ErrorCollector so that the test does not stop on failures.
+     */
+    @Test
+    public void fromString_knownArgument_shouldReturnValidEnum_usingErrorCollector() {
+        errorCollector.checkThat(fromString("rooster"), is(ROOSTER));
+        errorCollector.checkThat(fromString("Gallus gallus"), is(ROOSTER));
+
+        // uncomment to see ErrorCollector output for failing tests
+//        errorCollector.checkThat(fromString("rooster"), is(COMMON_KESTREL));
+//        errorCollector.checkThat(fromString("Gallus gallus"), is(WHITE_STORK));
+    }
+
     @Test
     public void fromString_nullArgument_shouldReturnNull() {
         assertThat(fromString(NULL_STRING), is(nullValue()));
@@ -96,6 +114,19 @@ public class BirdsEnumTest {
         // uncomment to test this case, the enum values are already prepared
 //        assertThat(BirdsEnum.WHITE_THROATED_DIPPER.getCommonName(), is("white-throated dipper"));
 //        assertThat(BirdsEnum.WHITE_THROATED_DIPPER.getSpecies(), is("Cinclus cinclus"));
+    }
+
+    /**
+     * This test is the same as the one above but uses an ErrorCollector so that the test does not stop on failures.
+     */
+    @Test
+    public void test_knownEnumData_shouldBeValid_usingErrorCollector() {
+        errorCollector.checkThat(ROOSTER.getCommonName(), is("rooster"));
+        errorCollector.checkThat(ROOSTER.getSpecies(), is("Gallus gallus"));
+
+        // uncomment to test this case, the enum values are already prepared
+//        errorCollector.checkThat(BirdsEnum.WHITE_THROATED_DIPPER.getCommonName(), is("white-throated dipper"));
+//        errorCollector.checkThat(BirdsEnum.WHITE_THROATED_DIPPER.getSpecies(), is("Cinclus cinclus"));
     }
 
     @Test

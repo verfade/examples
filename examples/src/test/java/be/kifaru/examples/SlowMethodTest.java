@@ -3,8 +3,10 @@ package be.kifaru.examples;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.TestName;
 
 /**
  * @author Devid Verfaillie
@@ -12,18 +14,21 @@ import org.junit.experimental.categories.Category;
  */
 public class SlowMethodTest {
 
-    // The JUnit category can be used on class level and on method level.
+    // The JUnit category can be used on class level (= SlowClassTest class) and on method level (= this test class).
+
+    @Rule
+    public TestName name = new TestName();
 
     @Test
     public void aFastRunningTestMethod() throws Exception {
-        System.out.println("Executing SlowMethodTest.aFastRunningTestMethod");
+        System.out.printf("Executing %s.%s()%n", getClass().getSimpleName(), name.getMethodName());
     }
 
     @Test
     @Category(SlowTestsCategory.class)
     public void aSlowRunningTestMethod() throws Exception {
         for (int i = 0; i < 5; i++) {
-            System.out.println("Executing SlowMethodTest.aSlowRunningTestMethod");
+            System.out.printf("Executing %s.%s()%n", getClass().getSimpleName(), name.getMethodName());
 
             LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(200));
         }

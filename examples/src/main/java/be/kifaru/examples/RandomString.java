@@ -3,6 +3,8 @@ package be.kifaru.examples;
 import java.util.Random;
 
 /**
+ * You can also use org.apache.commons.lang3.RandomStringUtils for some use cases.
+ *
  * @author Devid Verfaillie
  * @since 2015-09-01
  */

@@ -1,11 +1,11 @@
 package be.kifaru.examples;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
+import java.io.File;
+import java.io.IOException;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.io.FileUtils.readFileToString;
@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 /**
- * @author Devid Verfaillie (jd60988)
+ * @author Devid Verfaillie
  * @since 2016-08-07
  */
 public class JUnitTemporaryFolderAndFile {

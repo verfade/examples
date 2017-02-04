@@ -1,4 +1,4 @@
-package be.kifaru.examples;
+package be.kifaru.examples.servlet;
 
 import java.io.IOException;
 

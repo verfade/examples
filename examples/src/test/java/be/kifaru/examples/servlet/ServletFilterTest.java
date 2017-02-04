@@ -1,8 +1,4 @@
-package be.kifaru.examples;
-
-import javax.servlet.FilterChain;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package be.kifaru.examples.servlet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,9 +7,17 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static be.kifaru.examples.ServletFilter.ONCE_PER_REQUEST;
+import javax.servlet.FilterChain;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static be.kifaru.examples.servlet.ServletFilter.ONCE_PER_REQUEST;
 import static java.lang.Boolean.TRUE;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.only;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.BDDMockito.times;
+import static org.mockito.BDDMockito.verifyNoMoreInteractions;
 
 /**
  * Tests {@link ServletFilter}.

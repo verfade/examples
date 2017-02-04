@@ -12,7 +12,7 @@ public class SingletonWithLazyHolder {
      * <p/>
      * See Effective Java 2nd Edition, item 71 (Use lazy initialization judiciously).
      *
-     * @see <a href="http://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom">http://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom</a>
+     * @see <a href="https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom">https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom</a>
      */
     private static class LazyHolder {
 
